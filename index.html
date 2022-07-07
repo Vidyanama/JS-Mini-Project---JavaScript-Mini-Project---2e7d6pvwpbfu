@@ -1,13 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>vidya nama</p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login page</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #7d2ae8;
+      padding: 30px;
+    }
+    .container {
+      position: relative;
+      max-width: 850px;
+      width: 100%;
+      background: #fff;
+      padding: 40px 30px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      perspective: 2700px;
+    }
+    .container .cover {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      height: 100%;
+      width: 50%;
+      /* background: red; */
+      z-index: 98;
+      transition: all 1s ease;
+      transform-origin: left;
+      transform-style: preserve-3d;
+    }
+    .container .cover::before {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: #7d2ae8;
+      opacity: 0.5;
+    }
+    .container #flip:checked ~ .cover {
+      transform: rotateY(-180deg);
+    }
+    .container .cover img {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      object-fit: cover;
+    }
+    .container.form {
+      height: 100%;
+      width: 100%;
+      background: #fff;
+    }
+    .container .form-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .form-content .login-form,
+    .form-content .signup-form {
+      width: calc(100% / 2 - 25px);
+      /* background:red; */
+    }
+    form .form-content .title {
+      position: relative;
+      font-size: 24px;
+      font-weight: 500;
+      color: #333;
+    }
+    form .form-content .title:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 25px;
+      background: #7d2ae8;
+    }
+    form .signup-form .title:before {
+      width: 20px;
+    }
+    form .form-content .input-boxes {
+      margin-top: 30px;
+    }
+    form .form-content .input-box {
+      display: flex;
+      align-items: center;
+      height: 50px;
+      width: 100%;
+      margin: 10px 0;
+      position: relative;
+    }
+    .form-content .input-box input {
+      height: 100%;
+      width: 100%;
+      outline: none;
+      border: none;
+      padding: 0 30px;
+      font-size: 16px;
+      font-weight: 500;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+    .form-content .input-box input:focus,
+    .form-content .input-box input:valid {
+      border-color: #7d2ae8;
+    }
+    .form-content .input-box i {
+      position: absolute;
+      color: #7d2ae8;
+      font-size: 17px;
+    }
+    form .form-content .text {
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+    }
+    form .form-content .text a {
+      text-decoration: none;
+    }
+    form .form-content .text:hover {
+      text-decoration: underline;
+    }
+    form .form-content .button {
+      color: #fff;
+      margin-top: 40px;
+    }
+    form .form-content .button input {
+      color: #fff;
+      background: #7d2ae8;
+      border-radius: 6px;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+    form .form-content .button input:hover {
+      background: #5b13b9;
+    }
+    form .form-content label {
+      color: #5b13b9;
+      cursor: pointer;
+    }
+    form .form-content label:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <input type="checkbox" id="flip" />
+      <div class="cover">
+        <div class="fornt">
+          <img src="maxresdefault.jpg" alt="" />
+        </div>
+      </div>
+      <form onsubmit="event.preventDefault()">
+        <div class="form-content">
+          <div class="login-form">
+            <div class="title">Login</div>
+            <div class="input-boxes">
+              <div class="input-box">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <input name="name" type="text" placeholder="Enter Your Email" />
+              </div>
+              <div class="input-box">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+                <input
+                  name="password"
+                  type="password"
+                  placeholder="Enter Your Password"
+                />
+              </div>
+              <div class="text"><a href="#">Forgot Password?</a></div>
+              <div class="button input-box">
+                <input type="submit" id="myButton" value="Submit" onclick="validateForm()" />
+              </div>
+              <div class="text">
+                Don't have an account?
+                <label for="flip">signup now</label>
+              </div>
+            </div>
+          </div>
+          <div class="signup-form">
+            <div class="title">Sign Up</div>
+            <div class="input-boxes">
+              <div class="input-box">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <input type="text" placeholder="Enter Your Name" />
+              </div>
+              <div class="input-box">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <input type="text" placeholder="Enter Your Email" />
+              </div>
+              <div class="input-box">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+                <input type="password" placeholder="Enter Your Password" />
+              </div>
+              <div class="button input-box">
+                <input type="submit" value="Submit" />
+              </div>
+              <div class="text">
+                Already have an account?
+                <label for="flip">Login now</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>
+<script>
+  function validateForm() {
+    
+    var name = document.myForm.name.value;
+    var password = document.myForm.password.value;
 
+    if (name == null || name == "") {
+      alert("email cant be blank");
+      return false;
+    } else if (password.length < 6) {
+      alert("password must be at least 6 character long.");
+      return false;
+    }
+    console.log("hdvskjvsdvjjs");
+    //   alert("hiiiiii");
+    //   location.href= "quiz.html";
+    window.location.href = "google.com";
+  }
+</script>
